@@ -1,0 +1,33 @@
+{
+  "name": "Claim",
+  "description": "test",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.UIAutomation.Activities": "[19.1.0]",
+    "UiPath.System.Activities": "[18.4.2]",
+    "UiPath.Mail.Activities": "[1.3.0]",
+    "Microsoft.Office.Interop.Word": "[15.0.4797.1003]",
+    "OfficeComponent.WordToPdf": "[7.0.40.2]",
+    "Microsoft.Office.Word.Server": "[15.0.0]",
+    "UiPath.Word.Activities": "[1.3.0]",
+    "UiPath.Excel.Activities": "[2.5.2]",
+    "UiPathTeam.Excel.Extensions.Activities": "[1.0.4]",
+    "UiPathTeam.XLExcel.Activities": "[1.0.6814.30102]",
+    "ExcelFileToPDF.Activities": "[1.0.0]"
+  },
+  "schemaVersion": "3.2",
+  "studioVersion": "19.1.0.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ]
+  },
+  "projectType": "Workflow",
+  "libraryOptions": {
+    "includeOriginalXaml": false,
+    "privateWorkflows": []
+  }
+}

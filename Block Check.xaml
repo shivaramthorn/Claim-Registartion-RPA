@@ -1,0 +1,680 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Block_Check" this:Block_Check.Email="shivaramthorn@gmail.com"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.uipath.com/workflow/activities/word"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:this="clr-namespace:"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Email" Type="InArgument(x:String)" />
+    <x:Property Name="argument1" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Block_Check_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Block Check" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="DB" />
+      <Variable x:TypeArguments="sd:DataTable" Name="Blocked" />
+      <Variable x:TypeArguments="sd:DataTable" Name="Motor" />
+      <Variable x:TypeArguments="sd:DataTable" Name="NonMotor" />
+    </Flowchart.Variables>
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+        <Sequence DisplayName="Read Excel" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="C:\Users\Xi\Desktop\RPA\Motor.xlsx">
+            <ui:ExcelApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                  <ui:ExcelReadRange AddHeaders="True" DataTable="[DB]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="Database">
+                    <ui:ExcelReadRange.Range>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </ui:ExcelReadRange.Range>
+                  </ui:ExcelReadRange>
+                  <ui:ExcelReadRange AddHeaders="True" DataTable="[Blocked]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="Blocked">
+                    <ui:ExcelReadRange.Range>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </ui:ExcelReadRange.Range>
+                  </ui:ExcelReadRange>
+                </Sequence>
+              </ActivityAction>
+            </ui:ExcelApplicationScope.Body>
+          </ui:ExcelApplicationScope>
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="C:\Users\Xi\Desktop\RPA\motor_input.xlsx">
+            <ui:ExcelApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <ui:ExcelReadRange AddHeaders="True" DataTable="[Motor]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_3" SheetName="Motor">
+                    <ui:ExcelReadRange.Range>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </ui:ExcelReadRange.Range>
+                  </ui:ExcelReadRange>
+                  <ui:ExcelReadRange AddHeaders="True" DataTable="[NonMotor]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_4" SheetName="Non Motor">
+                    <ui:ExcelReadRange.Range>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </ui:ExcelReadRange.Range>
+                  </ui:ExcelReadRange>
+                </Sequence>
+              </ActivityAction>
+            </ui:ExcelApplicationScope.Body>
+          </ui:ExcelApplicationScope>
+        </Sequence>
+        <FlowStep.Next>
+          <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+            <Sequence DisplayName="Motor" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="Pass" />
+              </Sequence.Variables>
+              <ui:GetPassword DisplayName="Private: Get Password" sap2010:WorkflowViewState.IdRef="GetPassword_1" ProtectedPassword="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAewD8zmQDGkqsu8sOt9E/aAAAAAACAAAAAAAQZgAAAAEAACAAAABSEBaxe2bCZffeLpJ8tDqbVt1HJ0DOrYP/Ehr01u5RiAAAAAAOgAAAAAIAACAAAABfE9E1YwSAQu1EAaH4AHtONEfrYFgrgjgst5oat6sKmxAAAACAWiZQ9nwDDr+NdxDgxxzNQAAAAAyd88/ne0ofoCqepUYAu46RyQvHVrOo7DGGSGWb1D6o2ZmnlDkJrw94vmf56NGqUETvQapECZHG6y9GrFzm0I8=" Result="[Pass]" />
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Motor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="irow" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DB]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="drow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Blocked]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                                <ui:ForEachRow.Body>
+                                  <ActivityAction x:TypeArguments="sd:DataRow">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="brow" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                      <WriteLine DisplayName="Write Line" Text="[drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="WriteLine_1" />
+                                      <If Condition="[irow(0).ToString=drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_6">
+                                        <If.Then>
+                                          <Sequence>
+                                            <WriteLine DisplayName="Write Line" Text="[drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="WriteLine_2" />
+                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                              <WriteLine DisplayName="Write Line" Text="[drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="WriteLine_3" />
+                                              <If Condition="[drow(&quot;Policy No&quot;).ToString=brow(&quot;Insurer Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_1">
+                                                <If.Then>
+                                                  <Sequence>
+                                                    <WriteLine DisplayName="Write Line" Text="[drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="WriteLine_4" />
+                                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Policy is Blocked" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                        <ui:SendMail.Files>
+                                                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                        </ui:SendMail.Files>
+                                                      </ui:SendMail>
+                                                    </Sequence>
+                                                    <sap2010:WorkflowViewState.IdRef>Sequence_19</sap2010:WorkflowViewState.IdRef>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_1" />
+                                                </If.Else>
+                                              </If>
+                                              <If Condition="[drow(&quot;Vehicle No&quot;).ToString=brow(&quot;Vehicle Number Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_2">
+                                                <If.Then>
+                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Vehicle No is Blocked" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                      <ui:SendMail.Files>
+                                                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                      </ui:SendMail.Files>
+                                                    </ui:SendMail>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_2" />
+                                                </If.Else>
+                                              </If>
+                                              <If Condition="[drow(&quot;Chassis No&quot;).ToString=brow(&quot;Chassis blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_3">
+                                                <If.Then>
+                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Chassis is Blocked" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_3" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                      <ui:SendMail.Files>
+                                                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                      </ui:SendMail.Files>
+                                                    </ui:SendMail>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_3" />
+                                                </If.Else>
+                                              </If>
+                                              <If Condition="[drow(&quot;Engine No&quot;).ToString=brow(&quot;Engine Number Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_4">
+                                                <If.Then>
+                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Engine is Blocked" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                      <ui:SendMail.Files>
+                                                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                      </ui:SendMail.Files>
+                                                    </ui:SendMail>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_4" />
+                                                </If.Else>
+                                              </If>
+                                              <If Condition="[drow(&quot;Renewed&quot;).ToString&lt;&gt;&quot;yes&quot;]" sap2010:WorkflowViewState.IdRef="If_5">
+                                                <If.Then>
+                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Policy is not renewed" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_5" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                      <ui:SendMail.Files>
+                                                        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                      </ui:SendMail.Files>
+                                                    </ui:SendMail>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[NonMotor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+                                                    <ui:ForEachRow.Body>
+                                                      <ActivityAction x:TypeArguments="sd:DataRow">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="nrow" />
+                                                        </ActivityAction.Argument>
+                                                        <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                                          <WriteLine DisplayName="Write Line" Text="[drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="WriteLine_5" />
+                                                          <If Condition="[drow(&quot;Health Policy&quot;).ToString=nrow(&quot;Policy no&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_7">
+                                                            <If.Then>
+                                                              <If Condition="[nrow(&quot;Policy no&quot;).ToString=drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_10">
+                                                                <If.Then>
+                                                                  <If Condition="[drow(&quot;Policy No&quot;).ToString=brow(&quot;Insurer Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_9">
+                                                                    <If.Then>
+                                                                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Policy is Blocked" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_6" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                                        <ui:SendMail.Files>
+                                                                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                                        </ui:SendMail.Files>
+                                                                      </ui:SendMail>
+                                                                    </If.Then>
+                                                                    <If.Else>
+                                                                      <If Condition="[drow(&quot;Renewed&quot;).ToString&lt;&gt;&quot;yes&quot;]" sap2010:WorkflowViewState.IdRef="If_8">
+                                                                        <If.Then>
+                                                                          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Policy is not renewed" DisplayName="Send SMTP Mail Message" Email="[Email]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_7" IsBodyHtml="False" Password="[Pass]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="Claim Registration" To="[drow(&quot;Email&quot;).ToString]">
+                                                                            <ui:SendMail.Files>
+                                                                              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                                                            </ui:SendMail.Files>
+                                                                          </ui:SendMail>
+                                                                        </If.Then>
+                                                                        <If.Else>
+                                                                          <p:WordApplicationScope DisplayName="Word Application Scope" FilePath="Claim1.docx" sap2010:WorkflowViewState.IdRef="WordApplicationScope_1">
+                                                                            <p:WordApplicationScope.Body>
+                                                                              <ActivityAction x:TypeArguments="ui:WordDocument">
+                                                                                <ActivityAction.Argument>
+                                                                                  <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+                                                                                </ActivityAction.Argument>
+                                                                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                                                                  <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                                                                    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="a" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+                                                                                      <ui:SendHotkey.Target>
+                                                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="9fabec13f02223187f69d758dc896719" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                      </ui:SendHotkey.Target>
+                                                                                    </ui:SendHotkey>
+                                                                                    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="del" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                                                                                      <ui:SendHotkey.Target>
+                                                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="be885a3438cb8275e69c6ad7029586c6" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                      </ui:SendHotkey.Target>
+                                                                                    </ui:SendHotkey>
+                                                                                    <Sequence DisplayName="Basic" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                                                                      <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click '_WwG'" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                                                                                        <ui:Click.CursorPosition>
+                                                                                          <ui:CursorPosition OffsetX="407" OffsetY="141" Position="TopLeft" />
+                                                                                        </ui:Click.CursorPosition>
+                                                                                        <ui:Click.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="193285a994385431f09270488225d91d" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:Click.Target>
+                                                                                      </ui:Click>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[&quot;Name&quot; + &quot; &quot; + drow(&quot;Name&quot;).ToString]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="514b7d6f85f250969cff918e9c080b60" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a9199452362d02d7aed0a0b74ef0dd55" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_3" SendWindowMessages="False" SimulateType="False" Text="[&quot;Policy Number&quot;+ &quot; &quot; + drow(&quot;Policy No&quot;).ToString]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="812d302a9134add2985ffef7b19f13f7" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_4" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b12382fdb9f5dbd90a57028daa545ba0" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_5" SendWindowMessages="False" SimulateType="False" Text="[&quot;Policy Type&quot;+ &quot; &quot; + drow(&quot; Policy Type&quot;).ToString]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="32c4db454802218d11e967ab80bfb34a" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_6" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e2251ec6995fee57daf885d7dd3bfb8c" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_7" SendWindowMessages="False" SimulateType="False" Text="[&quot;Premium Amount&quot;+ &quot; &quot; + drow(&quot;Premium Amount&quot;).ToString]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="9de395d4d67848b25f4a957ffab8208c" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_8" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6027cb5eb4dda151933161702ef29ec1" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_9" SendWindowMessages="False" SimulateType="False" Text="[&quot;No of Claim&quot;+ &quot; &quot; + &quot;No of Claim&quot;]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e461000af840975950cceea5d4270b87" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_10" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="9bf8c5adb7b9839a119938096757eca1" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_11" SendWindowMessages="False" SimulateType="False" Text="[&quot;Claimed Amount&quot; + &quot; &quot; + &quot;Claimed Amount&quot;]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="88b34c06288683f74744082b0de9a867" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_12" SendWindowMessages="False" SimulateType="False" Text="%[k(enter)]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e8e2fe247060511ff0870adca85a5aa8" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                      <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into '_WwG'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_13" SendWindowMessages="False" SimulateType="False" Text="[&quot;Sum Insured&quot; + &quot; &quot; + &quot;Sum Insured&quot;]">
+                                                                                        <ui:TypeInto.Target>
+                                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2e07c1aa4893e7da42bed7782363b064" Selector="&lt;wnd app='winword.exe' cls='OpusApp' title='Claim1 - Word' /&gt;&lt;wnd cls='_WwG' title='Microsoft Word Document' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                        </ui:TypeInto.Target>
+                                                                                      </ui:TypeInto>
+                                                                                    </Sequence>
+                                                                                    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="s" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+                                                                                      <ui:SendHotkey.Target>
+                                                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                      </ui:SendHotkey.Target>
+                                                                                    </ui:SendHotkey>
+                                                                                  </Sequence>
+                                                                                  <p:WordExportToPdf DisplayName="Export to PDF" FilePath="Claim1.docx" sap2010:WorkflowViewState.IdRef="WordExportToPdf_1" />
+                                                                                </Sequence>
+                                                                              </ActivityAction>
+                                                                            </p:WordApplicationScope.Body>
+                                                                          </p:WordApplicationScope>
+                                                                        </If.Else>
+                                                                      </If>
+                                                                    </If.Else>
+                                                                  </If>
+                                                                </If.Then>
+                                                                <If.Else>
+                                                                  <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_6" />
+                                                                </If.Else>
+                                                              </If>
+                                                            </If.Then>
+                                                            <If.Else>
+                                                              <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_7" />
+                                                            </If.Else>
+                                                          </If>
+                                                        </Sequence>
+                                                      </ActivityAction>
+                                                    </ui:ForEachRow.Body>
+                                                  </ui:ForEachRow>
+                                                </If.Else>
+                                              </If>
+                                            </Sequence>
+                                            <sap2010:WorkflowViewState.IdRef>Sequence_20</sap2010:WorkflowViewState.IdRef>
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <ui:Continue sap2010:WorkflowViewState.IdRef="Continue_5" />
+                                        </If.Else>
+                                      </If>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:ForEachRow.Body>
+                              </ui:ForEachRow>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                      </ui:ForEachRow>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+              </ui:ForEachRow>
+            </Sequence>
+            <FlowStep.Next>
+              <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                <Sequence DisplayName="Non Motor" sap2010:WorkflowViewState.IdRef="Sequence_14" />
+              </FlowStep>
+            </FlowStep.Next>
+          </FlowStep>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="ExcelReadRange_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,282">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,391" />
+      <sap2010:ViewStateData Id="ExcelReadRange_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="ExcelReadRange_4" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,282">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExcelApplicationScope_2" sap:VirtualizedContainerService.HintSize="414,391" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetPassword_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="SendMail_1" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="210,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="232,276">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="210,51" />
+      <sap2010:ViewStateData Id="SendMail_2" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="210,51" />
+      <sap2010:ViewStateData Id="SendMail_3" sap:VirtualizedContainerService.HintSize="314,145" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="210,51" />
+      <sap2010:ViewStateData Id="SendMail_4" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="210,51" />
+      <sap2010:ViewStateData Id="SendMail_5" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="SendMail_6" sap:VirtualizedContainerService.HintSize="314,145" />
+      <sap2010:ViewStateData Id="SendMail_7" sap:VirtualizedContainerService.HintSize="314,145" />
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="336,154" />
+      <sap2010:ViewStateData Id="SendHotkey_2" sap:VirtualizedContainerService.HintSize="336,154" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_3" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_4" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_5" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_6" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_7" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_8" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_9" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_10" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_11" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_12" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="TypeInto_13" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="336,2492">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_3" sap:VirtualizedContainerService.HintSize="336,116" />
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="358,3160">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordExportToPdf_1" sap:VirtualizedContainerService.HintSize="358,59" />
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="380,3383">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,3492" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="753,3640" />
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="1092,3788" />
+      <sap2010:ViewStateData Id="Continue_6" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="Continue_7" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="232,276">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_4" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="232,640">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="232,276">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Continue_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="210,51" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="232,276">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_3" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="222,237">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,274.02</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,194.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,245.5 300,274.02</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,114.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,165.5 300,194.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,636">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,114.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Block_Check_1" sap:VirtualizedContainerService.HintSize="654,756">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
