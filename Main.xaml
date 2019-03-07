@@ -61,6 +61,8 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="Test1" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -126,89 +128,70 @@
           </ui:ExcelApplicationScope>
         </Sequence>
         <FlowStep.Next>
-          <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_7">
-            <Sequence DisplayName="Block Check" sap2010:WorkflowViewState.IdRef="Sequence_29">
-              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Motor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_13">
+          <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+            <Sequence DisplayName="For Test" sap2010:WorkflowViewState.IdRef="Sequence_42">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Default="1" Name="variable1" />
+                <Variable x:TypeArguments="x:String" Default="2" Name="variable2" />
+                <Variable x:TypeArguments="x:String" Default="3" Name="variable3" />
+                <Variable x:TypeArguments="x:String" Default="4" Name="variable4" />
+              </Sequence.Variables>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Motor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_23">
                 <ui:ForEachRow.Body>
                   <ActivityAction x:TypeArguments="sd:DataRow">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="sd:DataRow" Name="irow" />
                     </ActivityAction.Argument>
-                    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Blocked]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_12">
-                      <ui:ForEachRow.Body>
-                        <ActivityAction x:TypeArguments="sd:DataRow">
-                          <ActivityAction.Argument>
-                            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="brow" />
-                          </ActivityAction.Argument>
-                          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_28">
-                            <If Condition="[irow(0).ToString=brow(&quot;Insurer Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_5">
-                              <If.Then>
-                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_36" Text="[&quot;Insured Blocked&quot;]" TopMost="True" />
-                              </If.Then>
-                              <If.Else>
-                                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DB]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_18">
-                                  <ui:ForEachRow.Body>
-                                    <ActivityAction x:TypeArguments="sd:DataRow">
-                                      <ActivityAction.Argument>
-                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="drow" />
-                                      </ActivityAction.Argument>
-                                      <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_36">
-                                        <If Condition="[drow(&quot;Vehicle No&quot;).ToString=brow(&quot;Vehicle Number Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_13">
-                                          <If.Then>
-                                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_37" Text="[&quot;Vehicle Number Blocked&quot;]" TopMost="True" />
-                                          </If.Then>
-                                          <If.Else>
-                                            <If Condition="[drow(&quot;Chassis No&quot;).ToString=brow(&quot;Chasis Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_12">
-                                              <If.Then>
-                                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_38" Text="[&quot;Chasis Blocked&quot;]" TopMost="True" />
-                                              </If.Then>
-                                              <If.Else>
-                                                <If Condition="[drow(&quot;Engine No&quot;).ToString=brow(&quot;Engine Number Blockded&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_14">
-                                                  <If.Then>
-                                                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_39" Text="[&quot;Engine Number Blocked&quot;]" TopMost="True" />
-                                                  </If.Then>
-                                                  <If.Else>
-                                                    <If Condition="[drow(&quot;Renewed&quot;).ToString=Check.ToString]" sap2010:WorkflowViewState.IdRef="If_15">
-                                                      <If.Then>
-                                                        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[NonMotor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_19">
-                                                          <ui:ForEachRow.Body>
-                                                            <ActivityAction x:TypeArguments="sd:DataRow">
-                                                              <ActivityAction.Argument>
-                                                                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="nirow" />
-                                                              </ActivityAction.Argument>
-                                                              <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_37">
-                                                                <If Condition="[drow(&quot;Health Policy&quot;).ToString=nirow(0).ToString]" sap2010:WorkflowViewState.IdRef="If_16">
-                                                                  <If.Then>
-                                                                    <If Condition="[nirow(0).ToString=brow(&quot;Insurer Blocked&quot;).ToString]">
-                                                                      <If.Then>
-                                                                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[&quot;Insurer Blocked&quot;]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_40" />
-                                                                      </If.Then>
-                                                                      <sap2010:WorkflowViewState.IdRef>If_17</sap2010:WorkflowViewState.IdRef>
-                                                                    </If>
-                                                                  </If.Then>
-                                                                </If>
-                                                              </Sequence>
-                                                            </ActivityAction>
-                                                          </ui:ForEachRow.Body>
-                                                        </ui:ForEachRow>
-                                                      </If.Then>
-                                                    </If>
-                                                  </If.Else>
-                                                </If>
-                                              </If.Else>
-                                            </If>
-                                          </If.Else>
-                                        </If>
-                                      </Sequence>
-                                    </ActivityAction>
-                                  </ui:ForEachRow.Body>
-                                </ui:ForEachRow>
-                              </If.Else>
-                            </If>
-                          </Sequence>
-                        </ActivityAction>
-                      </ui:ForEachRow.Body>
-                    </ui:ForEachRow>
+                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                      <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[variable1.ToString]" />
+                      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DB]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_22">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="drow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                              <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[variable2.ToString]" />
+                              <If Condition="[irow(&quot;Policy no&quot;).ToString=drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_19">
+                                <If.Then>
+                                  <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[NonMotor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_21">
+                                    <ui:ForEachRow.Body>
+                                      <ActivityAction x:TypeArguments="sd:DataRow">
+                                        <ActivityAction.Argument>
+                                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="nrow" />
+                                        </ActivityAction.Argument>
+                                        <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                          <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[variable3.ToString]" />
+                                          <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Blocked]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_20">
+                                            <ui:ForEachRow.Body>
+                                              <ActivityAction x:TypeArguments="sd:DataRow">
+                                                <ActivityAction.Argument>
+                                                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="brow" />
+                                                </ActivityAction.Argument>
+                                                <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                                  <If Condition="[irow(&quot;Policy no&quot;).ToString=drow(&quot;Policy No&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_18">
+                                                    <If.Then>
+                                                      <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="Yes Policy is there" />
+                                                    </If.Then>
+                                                  </If>
+                                                </Sequence>
+                                              </ActivityAction>
+                                            </ui:ForEachRow.Body>
+                                          </ui:ForEachRow>
+                                        </Sequence>
+                                      </ActivityAction>
+                                    </ui:ForEachRow.Body>
+                                  </ui:ForEachRow>
+                                </If.Then>
+                                <If.Else>
+                                  <ui:Break sap2010:WorkflowViewState.IdRef="Break_1" />
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                      </ui:ForEachRow>
+                    </Sequence>
                   </ActivityAction>
                 </ui:ForEachRow.Body>
               </ui:ForEachRow>
@@ -338,8 +321,95 @@
       </Sequence>
     </FlowStep>
     <x:Reference>__ReferenceID0</x:Reference>
+    <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_7">
+      <Sequence DisplayName="Block Check" sap2010:WorkflowViewState.IdRef="Sequence_29">
+        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Motor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_13">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="irow" />
+              </ActivityAction.Argument>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Blocked]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_12">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="brow" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                      <If Condition="[irow(0).ToString=brow(&quot;Insurer Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_36" Text="[&quot;Insured Blocked&quot;]" TopMost="True" />
+                        </If.Then>
+                        <If.Else>
+                          <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DB]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_18">
+                            <ui:ForEachRow.Body>
+                              <ActivityAction x:TypeArguments="sd:DataRow">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="drow" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                  <If Condition="[drow(&quot;Vehicle No&quot;).ToString=brow(&quot;Vehicle Number Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_13">
+                                    <If.Then>
+                                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_37" Text="[&quot;Vehicle Number Blocked&quot;]" TopMost="True" />
+                                    </If.Then>
+                                    <If.Else>
+                                      <If Condition="[drow(&quot;Chassis No&quot;).ToString=brow(&quot;Chasis Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_12">
+                                        <If.Then>
+                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_38" Text="[&quot;Chasis Blocked&quot;]" TopMost="True" />
+                                        </If.Then>
+                                        <If.Else>
+                                          <If Condition="[drow(&quot;Engine No&quot;).ToString=brow(&quot;Engine Number Blockded&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_14">
+                                            <If.Then>
+                                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_39" Text="[&quot;Engine Number Blocked&quot;]" TopMost="True" />
+                                            </If.Then>
+                                            <If.Else>
+                                              <If Condition="[drow(&quot;Renewed&quot;).ToString=Check.ToString]" sap2010:WorkflowViewState.IdRef="If_15">
+                                                <If.Then>
+                                                  <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[NonMotor]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_19">
+                                                    <ui:ForEachRow.Body>
+                                                      <ActivityAction x:TypeArguments="sd:DataRow">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="nirow" />
+                                                        </ActivityAction.Argument>
+                                                        <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                                          <If Condition="[drow(&quot;Health Policy&quot;).ToString=nirow(0).ToString]" sap2010:WorkflowViewState.IdRef="If_16">
+                                                            <If.Then>
+                                                              <If Condition="[nirow(0).ToString=brow(&quot;Insurer Blocked&quot;).ToString]" sap2010:WorkflowViewState.IdRef="If_17">
+                                                                <If.Then>
+                                                                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_40" Text="[&quot;Insurer Blocked&quot;]" TopMost="True" />
+                                                                </If.Then>
+                                                              </If>
+                                                            </If.Then>
+                                                          </If>
+                                                        </Sequence>
+                                                      </ActivityAction>
+                                                    </ui:ForEachRow.Body>
+                                                  </ui:ForEachRow>
+                                                </If.Then>
+                                              </If>
+                                            </If.Else>
+                                          </If>
+                                        </If.Else>
+                                      </If>
+                                    </If.Else>
+                                  </If>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:ForEachRow.Body>
+                          </ui:ForEachRow>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+              </ui:ForEachRow>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+        </ui:ForEachRow>
+      </Sequence>
+    </FlowStep>
     <x:Reference>__ReferenceID1</x:Reference>
-    <sads:DebugSymbol.Symbol>dyxDOlxVc2Vyc1xYaVxEb2N1bWVudHNcVWlQYXRoXENsYWltXE1haW4ueGFtbD1CA9cCDwIBAUg0SDkCAQJMCX8UAgErggEN1wEYAgEDTQtlJgIBOWYLfiYCASyDAQ/WAR8CAQRNpgFNygECAUVTEWIcAgE6ZqYBZtABAgE4bBF7HAIBLYMBQIMBSQIBKYkBFdMBJQIBBVQTWicCAUBbE2EnAgE7bRNzJwIBM3QTeicCAS6JAUaJAVECASePARvQASYCAQZUQlRIAgFDVxlXSAIBQlSfAVSpAQIBQVtCW00CAT5eGV5IAgE9W6QBW60BAgE8bUJtSwIBNnAZcEgCATVtowFtqgECATR0QnROAgExdxl3SAIBMHSmAXSxAQIBL5ABHc8BIgIBB5ABK5ABagIBCJIBIZIB6AECASWVASHNATECAQmSAbcBkgHWAQIBJpUBUpUBWAIBI5sBJ8oBMgIBCpwBKckBLgIBC5wBN5wBkgECAQyeAS2eAfsBAgEhoQEtxwEyAgENngHDAZ4B6QECASKhATuhAY4BAgEOowExowH3AQIBH6YBMcUBNgIBD6MBxwGjAeUBAgEgpgE/pgGZAQIBEKgBNagBggICAR2rATXDAToCARGoAcsBqAHwAQIBHqsBQ6sBeAIBEq0BOcEBSQIBE60Baq0BdgIBG7MBP74BSgIBFLQBQb0BRgIBFbQBT7QBjQECARa2AUW7AUoCARe2AVO2AZMBAgEYuAFJuAGQAgIBGbgBrwG4Ac4BAgEa</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dz1DOlxVc2Vyc1xYaVxEb2N1bWVudHNcVWlQYXRoXENsYWltLVJlZ2lzdGFydGlvbi1SUEFcTWFpbi54YW1sN0QDnQMPAgEBSjRKOQIBAk4JgQEUAgEohAENxgEYAgEDTwtnJgIBNmgLgAEmAgEphgE+hgFBAgEHhwE+hwFBAgEGiAE+iAFBAgEFiQE+iQFBAgEEiwEPxQEfAgEIT6YBT8oBAgFCVRFkHAIBN2imAWjQAQIBNW4RfRwCASqLAUCLAUkCASaRARXCASACAQlWE1wnAgE9XRNjJwIBOG8TdScCATB2E3wnAgErkgEXkgGHAQIBI5MBF8EBJwIBClZCVkgCAUBZGVlIAgE/Vp8BVqkBAgE+XUJdTQIBO2AZYEgCATpdpAFdrQECATlvQm9LAgEzchlySAIBMm+jAW+qAQIBMXZCdk4CAS55GXlIAgEtdqYBdrEBAgEskgFukgGEAQIBJJMBSJMBTgIBIZkBHb4BKAIBC5oBH5oBjwECAR6bAR+9ASQCAQyaAXaaAYwBAgEfmwEtmwF6AgENnQEjuAEzAgEPuwEjuwFZAgEOnQFUnQFgAgEcowEptQE0AgEQpAErpAGbAQIBGaUBK7QBOwIBEaQBggGkAZgBAgEapQFcpQFnAgEXqwExsQE8AgESrAEzsAE4AgETrAFBrAGOAQIBFK4BN64BpgECARWuAY4BrgGjAQIBFg==</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -371,50 +441,19 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MessageBox_36" sap:VirtualizedContainerService.HintSize="200,51" />
-      <sap2010:ViewStateData Id="MessageBox_37" sap:VirtualizedContainerService.HintSize="200,51" />
-      <sap2010:ViewStateData Id="MessageBox_38" sap:VirtualizedContainerService.HintSize="200,51" />
-      <sap2010:ViewStateData Id="MessageBox_39" sap:VirtualizedContainerService.HintSize="200,51" />
-      <sap2010:ViewStateData Id="MessageBox_40" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="If_17" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="If_16" sap:VirtualizedContainerService.HintSize="589,356" />
-      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="222,175">
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="845,61" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="793,61" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="516,61" />
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="210,61" />
+      <sap2010:ViewStateData Id="If_18" sap:VirtualizedContainerService.HintSize="464,209" />
+      <sap2010:ViewStateData Id="Sequence_38" sap:VirtualizedContainerService.HintSize="486,333">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_19" sap:VirtualizedContainerService.HintSize="287,208" />
-      <sap2010:ViewStateData Id="If_15" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="If_12" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="If_13" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="222,175">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_18" sap:VirtualizedContainerService.HintSize="287,208" />
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,208" />
-      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="222,175">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_12" sap:VirtualizedContainerService.HintSize="287,208" />
-      <sap2010:ViewStateData Id="ForEachRow_13" sap:VirtualizedContainerService.HintSize="287,208">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="222,175">
+      <sap2010:ViewStateData Id="ForEachRow_20" sap:VirtualizedContainerService.HintSize="516,481">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -422,10 +461,45 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_7">
+      <sap2010:ViewStateData Id="Sequence_39" sap:VirtualizedContainerService.HintSize="538,706">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">30,184.5</av:Point>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_21" sap:VirtualizedContainerService.HintSize="568,854" />
+      <sap2010:ViewStateData Id="Break_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_19" sap:VirtualizedContainerService.HintSize="793,1002" />
+      <sap2010:ViewStateData Id="Sequence_40" sap:VirtualizedContainerService.HintSize="815,1227">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_22" sap:VirtualizedContainerService.HintSize="845,1375" />
+      <sap2010:ViewStateData Id="Sequence_41" sap:VirtualizedContainerService.HintSize="867,1600">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_23" sap:VirtualizedContainerService.HintSize="897,1748" />
+      <sap2010:ViewStateData Id="Sequence_42" sap:VirtualizedContainerService.HintSize="919,1872">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">380,114.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -435,7 +509,7 @@
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">30,104.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">130,155.5 130,184.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">230,130 260,130 260,140 380,140</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -481,7 +555,7 @@
       <sap2010:ViewStateData Id="FlowStep_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">420,114.5</av:Point>
+            <av:Point x:Key="ShapeLocation">30,234.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -548,7 +622,66 @@
       <sap2010:ViewStateData Id="FlowStep_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">420,184.5</av:Point>
+            <av:Point x:Key="ShapeLocation">0,24.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MessageBox_36" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="MessageBox_37" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="MessageBox_38" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="MessageBox_39" sap:VirtualizedContainerService.HintSize="200,51" />
+      <sap2010:ViewStateData Id="MessageBox_40" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_17" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="If_16" sap:VirtualizedContainerService.HintSize="589,356" />
+      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_19" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="If_15" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="If_12" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="If_13" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_18" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_12" sap:VirtualizedContainerService.HintSize="287,208" />
+      <sap2010:ViewStateData Id="ForEachRow_13" sap:VirtualizedContainerService.HintSize="287,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">30,184.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -560,11 +693,11 @@
             <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
             <av:Size x:Key="ShapeSize">60,75</av:Size>
             <x:Double x:Key="Width">634</x:Double>
-            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,130 230,130</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">270,40 130,40 130,104.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="688,756">
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="688,716">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
