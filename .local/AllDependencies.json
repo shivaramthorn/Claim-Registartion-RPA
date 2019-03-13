@@ -364,6 +364,46 @@
           }
         }
       },
+      "UiPath.PDF.Activities/1.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/net452/_._": {}
+        },
+        "runtime": {
+          "lib/net452/UiPath.PDF.Activities.Design.dll": {},
+          "lib/net452/UiPath.PDF.Activities.dll": {},
+          "lib/net452/UiPath.PDF.dll": {}
+        },
+        "resource": {
+          "lib/net452/fr/UiPath.PDF.Activities.Design.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net452/fr/UiPath.PDF.Activities.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net452/fr/UiPath.PDF.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net452/ja/UiPath.PDF.Activities.Design.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net452/ja/UiPath.PDF.Activities.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net452/ja/UiPath.PDF.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net452/ru/UiPath.PDF.Activities.Design.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net452/ru/UiPath.PDF.Activities.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net452/ru/UiPath.PDF.resources.dll": {
+            "locale": "ru"
+          }
+        }
+      },
       "UiPath.System.Activities/18.4.2": {
         "type": "package",
         "dependencies": {
@@ -1062,6 +1102,28 @@
         "uipath.mail.activities.nuspec"
       ]
     },
+    "UiPath.PDF.Activities/1.3.1": {
+      "sha512": "wn8D/aU0p78Ku6hRhJ3JYtB/r+FrXOeQCNm0zen11f4besSVRpQm8NGew79cACOnmgBXHluCeKU3H9E5Q+/0gg==",
+      "type": "package",
+      "path": "uipath.pdf.activities/1.3.1",
+      "files": [
+        "lib/net452/UiPath.PDF.Activities.Design.dll",
+        "lib/net452/UiPath.PDF.Activities.dll",
+        "lib/net452/UiPath.PDF.dll",
+        "lib/net452/fr/UiPath.PDF.Activities.Design.resources.dll",
+        "lib/net452/fr/UiPath.PDF.Activities.resources.dll",
+        "lib/net452/fr/UiPath.PDF.resources.dll",
+        "lib/net452/ja/UiPath.PDF.Activities.Design.resources.dll",
+        "lib/net452/ja/UiPath.PDF.Activities.resources.dll",
+        "lib/net452/ja/UiPath.PDF.resources.dll",
+        "lib/net452/ru/UiPath.PDF.Activities.Design.resources.dll",
+        "lib/net452/ru/UiPath.PDF.Activities.resources.dll",
+        "lib/net452/ru/UiPath.PDF.resources.dll",
+        "lib/net452/x86/pdfium.dll",
+        "uipath.pdf.activities.1.3.1.nupkg.sha512",
+        "uipath.pdf.activities.nuspec"
+      ]
+    },
     "UiPath.System.Activities/18.4.2": {
       "sha512": "AbRu7ROOp5f2WDpuQNcQalwjusixbIAlP+rzdSKCmXnaW8J8E969GSoxeCf2nk010c4NOvqQQM5NAd8xdfJgFg==",
       "type": "package",
@@ -1253,6 +1315,7 @@
       "OfficeComponent.WordToPdf >= 7.0.40.2 <= 7.0.40.2",
       "UiPath.Excel.Activities >= 2.5.2 <= 2.5.2",
       "UiPath.Mail.Activities >= 1.3.0 <= 1.3.0",
+      "UiPath.PDF.Activities >= 1.3.1 <= 1.3.1",
       "UiPath.System.Activities >= 18.4.2 <= 18.4.2",
       "UiPath.UIAutomation.Activities >= 19.1.0 <= 19.1.0",
       "UiPath.Word.Activities >= 1.3.0 <= 1.3.0",
@@ -1303,6 +1366,11 @@
             "include": "Runtime",
             "target": "Package",
             "version": "[1.3.0, 1.3.0]"
+          },
+          "UiPath.PDF.Activities": {
+            "include": "Runtime",
+            "target": "Package",
+            "version": "[1.3.1, 1.3.1]"
           },
           "UiPath.System.Activities": {
             "include": "Runtime",
