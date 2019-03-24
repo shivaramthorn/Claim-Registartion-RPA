@@ -1,0 +1,417 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Claim_Registration" mva:VisualBasic.Settings="{x:Null}"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sd1="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.PDF</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Claim Registration">
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID0">
+        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Image Scope" WorkbookPath="Test\motor_input.xlsx">
+          <ui:ExcelApplicationScope.Body>
+            <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Image ">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="sd:DataTable" Name="BillMotor" />
+                  <Variable x:TypeArguments="ui:GenericValue" Name="i" />
+                </Sequence.Variables>
+                <ui:ExcelReadRange AddHeaders="True" DataTable="[BillMotor]" DisplayName="Read Range" SheetName="Motor">
+                  <ui:ExcelReadRange.Range>
+                    <InArgument x:TypeArguments="x:String">
+                      <Literal x:TypeArguments="x:String" Value="" />
+                    </InArgument>
+                  </ui:ExcelReadRange.Range>
+                  <sap2010:WorkflowViewState.IdRef>ExcelReadRange_1</sap2010:WorkflowViewState.IdRef>
+                </ui:ExcelReadRange>
+                <Assign>
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="ui:GenericValue">[i]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="ui:GenericValue">[2]</InArgument>
+                  </Assign.Value>
+                  <sap2010:WorkflowViewState.IdRef>Assign_1</sap2010:WorkflowViewState.IdRef>
+                </Assign>
+                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[BillMotor]" DisplayName="For Each Row">
+                  <ui:ForEachRow.Body>
+                    <ActivityAction x:TypeArguments="sd:DataRow">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="nrow" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Body">
+                        <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" Values="[Directory.GetFiles(&quot;C:\Users\Xi\Documents\UiPath\Claim-Registartion-RPA\Bill\&quot;)]">
+                          <ui:ForEach.Body>
+                            <ActivityAction x:TypeArguments="x:Object">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="sd1:Process" Name="Pro" />
+                                  <Variable x:TypeArguments="ui:GenericValue" Name="Filen" />
+                                  <Variable x:TypeArguments="ui:GenericValue" Name="Filei" />
+                                  <Variable x:TypeArguments="ui:GenericValue" Name="Namef" />
+                                  <Variable x:TypeArguments="ui:GenericValue" Name="Namei" />
+                                </Sequence.Variables>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Filen]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[item.ToString.LastIndexOf("\")]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_2</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Filei]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[item.ToString.Substring(Filen)]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_3</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Namef]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[Filei.Split(vbNewLine.ToCharArray).Last.ToString]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_4</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Namef]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[Filei.Split("\"c).Last.ToString]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_5</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Namei]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[Namef.Split(vbNewLine.ToCharArray).Last.ToString]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_6</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:GenericValue">[Namei]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:GenericValue">[Namef.Split("."c).First.ToString]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_7</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                                <If Condition="[nrow(&quot;Policy no&quot;).ToString = Namei.ToString]">
+                                  <If.Then>
+                                    <Sequence>
+                                      <Assign>
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="sd1:Process">[Pro]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="sd1:Process">[Process.Start(item.ToString)]</InArgument>
+                                        </Assign.Value>
+                                        <sap2010:WorkflowViewState.IdRef>Assign_8</sap2010:WorkflowViewState.IdRef>
+                                      </Assign>
+                                      <Sequence DisplayName="Screen Scraping">
+                                        <Sequence.Variables>
+                                          <Variable x:TypeArguments="ui:GenericValue" Name="TextAbJpg" />
+                                        </Sequence.Variables>
+                                        <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Photos Applicati'" InformativeScreenshot="03b8b0521ca9de3a6be4637abbc14258" Selector="&lt;wnd app='applicationframehost.exe' omit:appid='Microsoft.Windows.Photos_8wekyb3d8bbwe!App' title='Photos' /&gt;">
+                                          <ui:WindowScope.Body>
+                                            <ActivityAction x:TypeArguments="x:Object">
+                                              <ActivityAction.Argument>
+                                                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                              </ActivityAction.Argument>
+                                              <Sequence DisplayName="Scrap image">
+                                                <Sequence.Variables>
+                                                  <Variable x:TypeArguments="ui:GenericValue" Name="Total" />
+                                                  <Variable x:TypeArguments="sd:DataTable" Name="Write" />
+                                                </Sequence.Variables>
+                                                <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR Text 'text  AB009.jpg'">
+                                                  <ui:GetOCRText.OCREngine>
+                                                    <ActivityFunc x:TypeArguments="sd2:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
+                                                      <ActivityFunc.Argument>
+                                                        <DelegateInArgument x:TypeArguments="sd2:Image" Name="Image" />
+                                                      </ActivityFunc.Argument>
+                                                      <ui:MicrosoftOCR FilterRegion="{x:Null}" Text="{x:Null}" DisplayName="Microsoft OCR" ExtractWords="False" Image="[Image]" Language="en" Profile="Legacy" Scale="1" sap2010:WorkflowViewState.IdRef="MicrosoftOCR_1" />
+                                                    </ActivityFunc>
+                                                  </ui:GetOCRText.OCREngine>
+                                                  <ui:GetOCRText.Target>
+                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="17951046beff52e6856f2bc9aab9f6d1" Selector="&lt;uia automationid='AutomationBackgroundControl' cls='Photos.Viewer.Controls.AccessibleContentControl' name='*.jpg' /&gt;" WaitForReady="INTERACTIVE" />
+                                                  </ui:GetOCRText.Target>
+                                                  <ui:GetOCRText.Text>
+                                                    <OutArgument x:TypeArguments="ui:GenericValue">[TextAbJpg]</OutArgument>
+                                                  </ui:GetOCRText.Text>
+                                                  <sap2010:WorkflowViewState.IdRef>GetOCRText_1</sap2010:WorkflowViewState.IdRef>
+                                                </ui:GetOCRText>
+                                                <ui:CloseApplication DisplayName="Close Application 'ApplicationFrameHost.ex...'">
+                                                  <ui:CloseApplication.Target>
+                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ad9e2d1b863455615ab81cbb5697defd" WaitForReady="INTERACTIVE" />
+                                                  </ui:CloseApplication.Target>
+                                                  <sap2010:WorkflowViewState.IdRef>CloseApplication_1</sap2010:WorkflowViewState.IdRef>
+                                                </ui:CloseApplication>
+                                                <Assign>
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="ui:GenericValue">[Total]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="ui:GenericValue">[TextAbJpg.Split(vbNewLine.ToCharArray).Last.ToString]</InArgument>
+                                                  </Assign.Value>
+                                                  <sap2010:WorkflowViewState.IdRef>Assign_9</sap2010:WorkflowViewState.IdRef>
+                                                </Assign>
+                                                <Assign>
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="ui:GenericValue">[Total]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="ui:GenericValue">[Total.Split(":"c).Last]</InArgument>
+                                                  </Assign.Value>
+                                                  <sap2010:WorkflowViewState.IdRef>Assign_10</sap2010:WorkflowViewState.IdRef>
+                                                </Assign>
+                                                <ui:BuildDataTable DataTable="[Write]" DisplayName="Build Data Table" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Bill_x0020_Amount&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" />
+                                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{Total}]" DataTable="[Write]" DisplayName="Add Data Row" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                                <ui:ExcelWriteRange AddHeaders="False" DataTable="[Write]" DisplayName="Write Range" SheetName="Non Motor" StartingCell="[&quot;C&quot;+i]" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" />
+                                                <Assign>
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="ui:GenericValue">[i]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="ui:GenericValue">[i+1]</InArgument>
+                                                  </Assign.Value>
+                                                  <sap2010:WorkflowViewState.IdRef>Assign_11</sap2010:WorkflowViewState.IdRef>
+                                                </Assign>
+                                                <sap2010:WorkflowViewState.IdRef>Sequence_1</sap2010:WorkflowViewState.IdRef>
+                                              </Sequence>
+                                            </ActivityAction>
+                                          </ui:WindowScope.Body>
+                                          <sap2010:WorkflowViewState.IdRef>WindowScope_1</sap2010:WorkflowViewState.IdRef>
+                                        </ui:WindowScope>
+                                        <sap2010:WorkflowViewState.IdRef>Sequence_2</sap2010:WorkflowViewState.IdRef>
+                                      </Sequence>
+                                      <sap2010:WorkflowViewState.IdRef>Sequence_3</sap2010:WorkflowViewState.IdRef>
+                                    </Sequence>
+                                  </If.Then>
+                                  <sap2010:WorkflowViewState.IdRef>If_1</sap2010:WorkflowViewState.IdRef>
+                                </If>
+                                <sap2010:WorkflowViewState.IdRef>Sequence_4</sap2010:WorkflowViewState.IdRef>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEach.Body>
+                          <sap2010:WorkflowViewState.IdRef>ForEach`1_1</sap2010:WorkflowViewState.IdRef>
+                        </ui:ForEach>
+                        <sap2010:WorkflowViewState.IdRef>Sequence_5</sap2010:WorkflowViewState.IdRef>
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ForEachRow.Body>
+                  <sap2010:WorkflowViewState.IdRef>ForEachRow_1</sap2010:WorkflowViewState.IdRef>
+                </ui:ForEachRow>
+                <sap2010:WorkflowViewState.IdRef>Sequence_6</sap2010:WorkflowViewState.IdRef>
+              </Sequence>
+            </ActivityAction>
+          </ui:ExcelApplicationScope.Body>
+          <sap2010:WorkflowViewState.IdRef>ExcelApplicationScope_1</sap2010:WorkflowViewState.IdRef>
+        </ui:ExcelApplicationScope>
+        <sap2010:WorkflowViewState.IdRef>FlowStep_1</sap2010:WorkflowViewState.IdRef>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <sap2010:WorkflowViewState.IdRef>Flowchart_1</sap2010:WorkflowViewState.IdRef>
+    <sads:DebugSymbol.Symbol>d0tDOlxVc2Vyc1xYaVxEb2N1bWVudHNcVWlQYXRoXENsYWltLVJlZ2lzdGFydGlvbi1SUEFcQ2xhaW0gUmVnaXN0cmF0aW9uLnhhbWxHSAOnAg8CAQFLCaACJAIBAkteS3UCAV1RD5wCGgIBA1YRXSUCAVheEWYaAgFUZxGaAiECAQRWQFZNAgFbWRdZRgIBWlZxVngCAVljQ2NGAgFXYERgRwIBVWdCZ08CAVJtF5YCIgIBBW4ZlAImAgEGbnZu0wECAVF0H5ACKgIBB3whhAEqAgFMhQEhjQEqAgFGjgEhlgEqAgFClwEhnwEqAgE+oAEhqAEqAgE6qQEhsQEqAgE2sgEhjgImAgEIgQFTgQFzAgFPflR+WwIBTYoBU4oBcwIBSYcBVIcBWwIBR5MBU5MBhQECAUWQAVSQAVsCAUOcAVOcAXQCAUGZAVSZAVsCAT+lAVOlAYUBAgE9ogFUogFbAgE7rgFTrgF1AgE5qwFUqwFbAgE3sgEvsgFoAgEJtAEliwIwAgEKtQEnvQEwAgEyvgEniQIyAgELugFVugFzAgE1twFWtwFbAgEzwgEphwI6AgEMwgGFAsIB+gICATHIAS+DAjoCAQ3NATHdAUECASjeATHjAUcCASfkATHsAToCASPtATH1AToCAR/2ATH2Aa8JAgEc9wEx9wHIAQIBGPgBMfgB8wECARP5ATGBAjoCAQ7XAcQB1wHBAgIBMNoBZNoBbwIBLtMBN9MBjQICASnpAWPpAZkBAgEm5gFk5gFrAgEk8gFj8gF7AgEi7wFk7wFrAgEg9gFO9gFXAgEd9wFy9wF7AgEa9wFc9wFnAgEZ+AGpAfgBvAECARf4AWL4AWsCARX4AZAB+AGbAQIBFP4BY/4BaAIBEfsBZPsBZwIBD9MB1gHTAdkBAgEt0wGnAdMBsAECASvTAboB0wG+AQIBKg==</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.IdRef>Claim_Registration_1</sap2010:WorkflowViewState.IdRef>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="673,59" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="673,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="583,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="436,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MicrosoftOCR_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetOCRText_1" sap:VirtualizedContainerService.HintSize="314,168" />
+      <sap2010:ViewStateData Id="CloseApplication_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="314,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="314,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BuildDataTable_1" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="ExcelWriteRange_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,1026">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WindowScope_1" sap:VirtualizedContainerService.HintSize="414,1172" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="436,1296">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="458,1520">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="583,1667">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="605,2391">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="621,2524" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="643,2648">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="673,2795" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="695,3118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="709,3227">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,636">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Claim_Registration_1" sap:VirtualizedContainerService.HintSize="654,756" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
