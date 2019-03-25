@@ -4,7 +4,7 @@ Insurance Claim Registartion
 ## Problem Statement
 Many insurance companies are struggling to process large number of claim requests, as this is a repeated task for the customer support executives for processing big set of claims.To solve this problem we are using RPA automation to register multiple  claims for immediate processing in general insurance(Motor vehicle,Health,Property).
 
-## Abstract
+## Proposed System
 The automated process, is a trending technology to reduce human repeated works like data entry. The insurance company has to register a claim, for the requested insurance policy from the insurer holder and also has different registration processes according to the insurance applied by the client.
 This project is based on registering the request for claiming Motor policies in general insurance and other polices in general insurance, RPA uses the policy number as a key input to proceed which are provided by the insurers so it can be
 accessed through an excel file, hence each policy can get registered if it is a valid request, after the verification of various factors (like black listing of vehicles, clients, engines & chassis) and Estimating the Eligiblity to claim the policy is calculated using the sum insured,Claimed amount,Bill Amount & NCD. All these processes are automated to have time efficient process to satisfy the client
