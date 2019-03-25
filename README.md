@@ -18,7 +18,7 @@ needs.
 - Property Policy Registration [Dini Kokila K]
 
 ## Image Scraping
-The Bill from pannel workshop for Motor Vehicles Damages and The Hospital Bill are Image scraped and store the Total Amount from the bill in the Input excel file. The Verified details will be sent to customer as a mail if the policy holder has a Black list then Detials of Balck list will be sent as mail to the customer.
+The Bill from pannel workshop for Motor Vehicles Damages and The Hospital Bill are Image scraped and store the Total Amount from the bill in the Input excel file.
 
 ## Motor Policy Registration
 The input policy no from the excel file is fetched and it is checked for Black list(Insurer Holder,Engine No,Vehicle No,Chasis No) from another excel file which contains the Policy details and Black list details. The Verified details will be sent to customer as a mail if the policy holder has a Black list then Detials of Balck list will be sent as mail to the customer.
@@ -35,13 +35,13 @@ The input policy number is checked for separating the property policy no so that
 ## Project Status
 - Image Scraping (Working Successfully)
 - Motor Policy Registration(90% Completed)
-- Cross Product Registration((80% Completed)
+- Cross Product Registration((90% Completed)
 - Health Policy Registration(90% Completed)
-- Property Policy Registration(30% Completed)
+- Property Policy Registration(50% Completed)
 
 ## Pending Works
 - Image Scraping (None)
-- Motor Policy Registration (Renewal Check)
-- Cross Product Registration (Blacklist check and Renewal Check)
-- Health Policy Registration (Renewal Check)
-- Property Policy Registration (Renewal Check, Mail automation and Blacklist check)
+- Motor Policy Registration (Mail Drafting)
+- Cross Product Registration (Mail Drafting)
+- Health Policy Registration (Mail Drafting)
+- Property Policy Registration (Mail automation and Excel Automation)
