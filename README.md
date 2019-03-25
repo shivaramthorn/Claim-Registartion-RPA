@@ -37,7 +37,7 @@ The input policy number is checked for separating the property policy no so that
 - Motor Policy Registration(90% Completed)
 - Cross Product Registration((90% Completed)
 - Health Policy Registration(90% Completed)
-- Property Policy Registration(60% Completed)
+- Property Policy Registration(50% Completed)
 
 ## Pending Works
 - Image Scraping (None)
