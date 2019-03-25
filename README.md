@@ -35,13 +35,13 @@ The input policy number is checked for separating the property policy no so that
 ## Project Status
 - Image Scraping (Working Successfully)
 - Motor Policy Registration(90% Completed)
-- Cross Product Registration((80% Completed)
+- Cross Product Registration((90% Completed)
 - Health Policy Registration(90% Completed)
-- Property Policy Registration(30% Completed)
+- Property Policy Registration(60% Completed)
 
 ## Pending Works
 - Image Scraping (None)
-- Motor Policy Registration (Renewal Check)
-- Cross Product Registration (Blacklist check and Renewal Check)
-- Health Policy Registration (Renewal Check)
-- Property Policy Registration (Renewal Check, Mail automation and Blacklist check)
+- Motor Policy Registration (Mail Drafting)
+- Cross Product Registration (Mail Drafting)
+- Health Policy Registration (Mail Drafting)
+- Property Policy Registration (Mail automation and Excel Automation)
